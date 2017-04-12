@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Angular QuickStart</title>
+    <base href="/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../assets/css/styles.css"> <!-- Include External stylesheets -->
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css"> <!-- Include Bootstrap dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>    
+
+
+    <div class="container container-fluid"> <!-- A fluid container to contain the document contents  -->
+        
+        <h2> ngModel </h2>
+            <br>          
+                <form>
+                    <div>
+                        <label for="username">Role: Admin / Member / Super Admin / Supervisor</label> <!--A list of the roles that can be chosen from -->
+                        <input type="text" [(ngModel)]="chosenRole" value="chosenRole" name="chosenRole" class="form-control" required> <!--Takes a string of role name as input and binds it to the "chosenRole" property -->
+                        <br>
+                        <button type="submit" class="btn btn-md btn-primary" (click)="checkRole(chosenRole)">Check users in this role</button><!--The click of this button triggers a function checkRole() to fetch the employee details with the input role -->
+                        <button type="submit" class="btn btn-md btn-primary" (click)="reset()">Reset role</button><!--The click of this button triggers a function reset() to empty the table with previous role details -->
+                    
+                    </div>
+                </form>
+
+                <hr>
+
+
+        <div class="table table-responsive" *ngIf="user_arr.length">  <!-- Check if user.arr has values. If yes, create a bootstrap table -->
+            <table>     
+                <thead>
+                    <tr class="tabrow">  
+                        <th class="tabrow">Name</th>
+                        <th class="tabrow">Role</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor = "let a of user_arr"> <!-- Iterate through the user.arr to display details of all users -->
+                    <tr>
+                        <td class="tabcell">{{a.name}}</td>
+                        <td class="tabcell">{{a.role}}</td>                        
+                    </tr>
+                <tbody>
+            </table>
+            <hr>
+                <!--Create a rersponsive, striped, bordered bootstrap table  -->
+         <div class="table table-responsive" *ngIf="filterArr.length">  <!--Check if filterArr has values. If yes, create a bootstrap table  -->
+            <table>     
+                <thead>
+                    <tr class="tabrow">  
+                        <th class="tabrow">List of employees in the chosen role</th>
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr *ngFor = "let a of filterArr"> <!-- Iterate through the filterArr to display details of filtered users -->
+                        <td class="tabcell">{{a}}</td>                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+</html>
+       
+        
